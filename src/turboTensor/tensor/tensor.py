@@ -53,7 +53,7 @@ class Tensor:
 
     
     def __add__(self, other):
-        other = other if isinstance(other, Tensor) else Tensor(other) 
+        other = other if isinstance(other, Tensor) else Tensor(other, backend=self.backend) 
             
         t = self.data + other.data 
         out = Tensor(t , (self, other), _op='+', backend=self.backend)
@@ -66,7 +66,7 @@ class Tensor:
         return out 
 
     def __mul__(self, other):
-        other = other if isinstance(other, Tensor) else Tensor(other)
+        other = other if isinstance(other, Tensor) else Tensor(other, backend=self.backend)
         
         t = self.data * other.data 
         out = Tensor(t, (self, other), _op='*', backend=self.backend) 
@@ -177,7 +177,7 @@ class Tensor:
         return out 
 
     def __matmul__(self, other):
-        other = other if isinstance(other, Tensor) else Tensor(other)
+        other = other if isinstance(other, Tensor) else Tensor(other, backend=self.backend)
     
         A = self.data
         B = other.data
@@ -222,7 +222,7 @@ class Tensor:
         return self * -1
 
     def __sub__(self, other): 
-        other = other if isinstance(other, Tensor) else Tensor(other)
+        other = other if isinstance(other, Tensor) else Tensor(other, backend=self.backend)
 
         return self + -other 
 
@@ -239,7 +239,7 @@ class Tensor:
         return out 
 
     def __truediv__(self, other):
-        other = other if isinstance(other, Tensor) else Tensor(other)
+        other = other if isinstance(other, Tensor) else Tensor(other, backend=self.backend)
         return self * (other ** -1)
 
     def __radd__(self, other): 
